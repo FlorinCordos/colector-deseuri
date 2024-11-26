@@ -45,10 +45,7 @@ function HomePage() {
 
   const isEmailValid = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const isFormValid = () =>
-    nume &&
-    isEmailValid(email) &&
-    Object.keys(deseuriCantitati).length > 0 &&
-    feedbackRating > 0;
+    nume && isEmailValid(email) && Object.keys(deseuriCantitati).length > 0;
 
   const sendEmail = (formData) => {
     const serviceID = "service_gnnfc55";
