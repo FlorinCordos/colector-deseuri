@@ -1,103 +1,53 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   useNavigate,
 } from "react-router-dom";
-import { Form, Button, Dropdown } from "semantic-ui-react";
-import axios from "axios";
+import { Form, Button, Dropdown, Modal, Input } from "semantic-ui-react";
 import "./App.css";
+import axios from "axios";
 import emailjs from "emailjs-com";
 
 function HomePage() {
   const [nume, setNume] = useState("");
   const [email, setEmail] = useState("");
-  const [tipDeseu, setTipDeseu] = useState("");
-  const [deseu, setDeseu] = useState("");
-  const [stare, setStare] = useState("");
-  const [cantitate, setCantitate] = useState("");
+  const [tipDeseu, setTipDeseu] = useState([]);
+  const [deseuriCantitati, setDeseuriCantitati] = useState({});
+  const [currentDeseu, setCurrentDeseu] = useState(null);
+  const [currentCantitate, setCurrentCantitate] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
   const [feedbackRating, setFeedbackRating] = useState(0);
   const navigate = useNavigate();
 
   const tipDeseuOptions = [
-    {
-      key: "laptop",
-      text: "Laptop",
-      value: "laptop",
-    },
-    {
-      key: "monitor",
-      text: "Monitor",
-      value: "monitor",
-    },
+    { key: "laptop", text: "Laptop", value: "laptop" },
+    { key: "monitor", text: "Monitor", value: "monitor" },
     {
       key: "unitate_centrala",
       text: "Unitate centrală",
       value: "unitate_centrala",
     },
-    {
-      key: "tastatura",
-      text: "Tastatură",
-      value: "tastatura",
-    },
-    {
-      key: "mouse",
-      text: "Mouse",
-      value: "mouse",
-    },
-    {
-      key: "cast",
-      text: "Căști",
-      value: "casti",
-    },
+    { key: "tastatura", text: "Tastatură", value: "tastatura" },
+    { key: "mouse", text: "Mouse", value: "mouse" },
+    { key: "casti", text: "Căști", value: "casti" },
     {
       key: "camera_video",
       text: "Cameră video / Microfon",
       value: "camera_video",
     },
-    {
-      key: "cabluri",
-      text: "Cabluri diverse",
-      value: "cabluri",
-    },
-    {
-      key: "imprimanta",
-      text: "Imprimantă",
-      value: "imprimanta",
-    },
-    {
-      key: "fax",
-      text: "FAX",
-      value: "fax",
-    },
-    {
-      key: "telefon",
-      text: "Telefon",
-      value: "telefon",
-    },
+    { key: "cabluri", text: "Cabluri diverse", value: "cabluri" },
+    { key: "imprimanta", text: "Imprimantă", value: "imprimanta" },
+    { key: "fax", text: "FAX", value: "fax" },
+    { key: "telefon", text: "Telefon", value: "telefon" },
   ];
 
-  const tipStareOptions = [
-    {
-      key: "defect",
-      text: "Defect",
-      value: "Defect",
-    },
-    {
-      key: "functional",
-      text: "Functional",
-      value: "Functional",
-    },
-  ];
   const isEmailValid = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const isFormValid = () =>
     nume &&
     isEmailValid(email) &&
-    tipDeseu &&
-    deseu &&
-    stare &&
-    cantitate &&
+    Object.keys(deseuriCantitati).length > 0 &&
     feedbackRating > 0;
 
   const sendEmail = (formData) => {
@@ -111,6 +61,25 @@ function HomePage() {
       .catch(() =>
         alert("Eroare la trimiterea emailului. Verifică configurația.")
       );
+  };
+
+  const handleDeseuSelect = (e, { value }) => {
+    const newlySelected = value.filter((v) => !tipDeseu.includes(v));
+    if (newlySelected.length > 0) {
+      setCurrentDeseu(newlySelected[0]);
+      setModalOpen(true);
+    }
+    setTipDeseu(value);
+  };
+
+  const handleModalSubmit = () => {
+    setDeseuriCantitati((prev) => ({
+      ...prev,
+      [currentDeseu]: currentCantitate,
+    }));
+    setModalOpen(false);
+    setCurrentCantitate("");
+    setCurrentDeseu(null);
   };
 
   const onSubmit = () => {
@@ -135,36 +104,47 @@ function HomePage() {
           hour12: false,
         });
 
-        const data = {
+        const rows = Object.entries(deseuriCantitati).map(
+          ([tip, cantitate]) => ({
+            nume,
+            email,
+            tipDeseu: tip,
+            cantitate,
+            feedback: feedbackRating,
+            data: currentDateTime,
+            deseuLivrat: "FALSE",
+            ID: newID,
+          })
+        );
+
+        // Pregătim un rezumat al deșeurilor pentru email
+        const deseuriSummary = Object.entries(deseuriCantitati)
+          .map(([tip, cantitate]) => `${tip} (${cantitate})`)
+          .join(", ");
+
+        const formData = {
           nume,
           email,
-          tipDeseu,
-          deseu,
-          stare,
-          cantitate,
+          deseuri: deseuriSummary, // Trimitem toate deșeurile și cantitățile
           feedback: feedbackRating,
-          data: currentDateTime,
-          deseuLivrat: "FALSE",
           ID: newID,
         };
 
         return axios
           .post(
             `https://api.sheetbest.com/sheets/75d91a11-2dc6-481b-a5be-6786d94932e2`,
-            data
+            rows
           )
-          .then(() => data);
+          .then(() => formData);
       })
-      .then((data) => {
-        sendEmail(data);
+      .then((formData) => {
+        sendEmail(formData); // Trimitem datele corecte la emailjs
 
         // Resetează câmpurile formularului
         setNume("");
         setEmail("");
-        setTipDeseu("");
-        setDeseu("");
-        setStare("");
-        setCantitate("");
+        setTipDeseu([]);
+        setDeseuriCantitati({});
         setFeedbackRating(0);
 
         // Navighează către pagina de confirmare
@@ -175,6 +155,7 @@ function HomePage() {
 
   return (
     <div className="form-container">
+      <header className="app-header">GreenGadget</header>
       <Form className="form-box">
         <Form.Field>
           <label>Nume</label>
@@ -198,38 +179,11 @@ function HomePage() {
           <Dropdown
             placeholder="Selectează tipul deșeului"
             fluid
+            multiple
             selection
             options={tipDeseuOptions}
             value={tipDeseu}
-            onChange={(e, { value }) => setTipDeseu(value)}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Deseu</label>
-          <input
-            placeholder="Deseu"
-            value={deseu}
-            onChange={(e) => setDeseu(e.target.value)}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Stare</label>
-          <Dropdown
-            placeholder="Selectează starea deseului"
-            fluid
-            selection
-            options={tipStareOptions}
-            value={stare}
-            onChange={(e, { value }) => setStare(value)}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Cantitate</label>
-          <input
-            type="number"
-            placeholder="Cantitate"
-            value={cantitate}
-            onChange={(e) => setCantitate(e.target.value)}
+            onChange={handleDeseuSelect}
           />
         </Form.Field>
         <Form.Field>
@@ -252,6 +206,31 @@ function HomePage() {
           Submit
         </Button>
       </Form>
+
+      <Modal open={modalOpen} size="mini">
+        <Modal.Header>Cantitate pentru {currentDeseu}</Modal.Header>
+        <Modal.Content>
+          <Input
+            type="number"
+            placeholder="Cantitate"
+            value={currentCantitate}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (/^\d*$/.test(value)) {
+                // Permite doar numere pozitive
+                setCurrentCantitate(value);
+              }
+            }}
+          />
+        </Modal.Content>
+        <Modal.Actions>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Button onClick={handleModalSubmit} disabled={!currentCantitate}>
+              Salvează
+            </Button>
+          </div>
+        </Modal.Actions>
+      </Modal>
     </div>
   );
 }
