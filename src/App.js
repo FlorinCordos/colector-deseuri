@@ -107,14 +107,13 @@ function HomePage() {
             email,
             tipDeseu: tip,
             cantitate,
-            feedback: feedbackRating,
             data: currentDateTime,
             deseuLivrat: "FALSE",
             ID: newID,
           })
         );
 
-        // Pregătim un rezumat al deșeurilor pentru email
+        // Construim un rezumat al deșeurilor pentru email
         const deseuriSummary = Object.entries(deseuriCantitati)
           .map(([tip, cantitate]) => `${tip} (${cantitate})`)
           .join(", ");
@@ -122,9 +121,8 @@ function HomePage() {
         const formData = {
           nume,
           email,
-          deseuri: deseuriSummary, // Trimitem toate deșeurile și cantitățile
-          feedback: feedbackRating,
-          ID: newID,
+          deseuri: deseuriSummary, // Trimitem tipurile și cantitățile
+          ID: newID, // Trimitem ID-ul
         };
 
         return axios
