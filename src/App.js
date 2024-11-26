@@ -22,25 +22,61 @@ function HomePage() {
   const navigate = useNavigate();
 
   const tipDeseuOptions = [
-    { key: "laptop", text: "Laptop", value: "laptop" },
-    { key: "monitor", text: "Monitor", value: "monitor" },
+    {
+      key: "laptop",
+      text: "Laptop",
+      value: "Laptop",
+    },
+    {
+      key: "monitor",
+      text: "Monitor",
+      value: "Monitor",
+    },
     {
       key: "unitate_centrala",
       text: "Unitate centrală",
-      value: "unitate_centrala",
+      value: "Unitate Centrală",
     },
-    { key: "tastatura", text: "Tastatură", value: "tastatura" },
-    { key: "mouse", text: "Mouse", value: "mouse" },
-    { key: "casti", text: "Căști", value: "casti" },
+    {
+      key: "tastatura",
+      text: "Tastatură",
+      value: "Tastatură",
+    },
+    {
+      key: "mouse",
+      text: "Mouse",
+      value: "Mouse",
+    },
+    {
+      key: "casti",
+      text: "Căști",
+      value: "Căști",
+    },
     {
       key: "camera_video",
       text: "Cameră video / Microfon",
-      value: "camera_video",
+      value: "Cameră video",
     },
-    { key: "cabluri", text: "Cabluri diverse", value: "cabluri" },
-    { key: "imprimanta", text: "Imprimantă", value: "imprimanta" },
-    { key: "fax", text: "FAX", value: "fax" },
-    { key: "telefon", text: "Telefon", value: "telefon" },
+    {
+      key: "cabluri",
+      text: "Cabluri diverse",
+      value: "Cabluri diverse",
+    },
+    {
+      key: "imprimanta",
+      text: "Imprimantă",
+      value: "Imprimantă",
+    },
+    {
+      key: "fax",
+      text: "FAX",
+      value: "Fax",
+    },
+    {
+      key: "telefon",
+      text: "Telefon",
+      value: "Telefon",
+    },
   ];
 
   const isEmailValid = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
