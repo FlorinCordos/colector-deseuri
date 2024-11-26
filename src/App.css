@@ -165,3 +165,26 @@ label {
 .ui.input input {
   text-align: center; /* Centrare text în input */
 }
+
+/* Centrarea conținutului din popup */
+.ui.modal {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.ui.modal .content {
+  text-align: center;
+}
+
+.ui.modal .actions {
+  display: flex;
+  justify-content: center;
+}
+
+.ui.modal input {
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  width: 70%; /* Ajustează lățimea input-ului */
+}

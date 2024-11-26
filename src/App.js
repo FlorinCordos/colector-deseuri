@@ -186,22 +186,6 @@ function HomePage() {
             onChange={handleDeseuSelect}
           />
         </Form.Field>
-        <Form.Field>
-          <label>Feedback</label>
-          <div className="feedback-rating">
-            {[1, 2, 3, 4, 5].map((rating) => (
-              <span
-                key={rating}
-                onClick={() => setFeedbackRating(rating)}
-                className={`feedback-star ${
-                  feedbackRating >= rating ? "active" : ""
-                }`}
-              >
-                ★
-              </span>
-            ))}
-          </div>
-        </Form.Field>
         <Button type="submit" onClick={onSubmit} disabled={!isFormValid()}>
           Submit
         </Button>
