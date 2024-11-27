@@ -169,9 +169,9 @@ function HomePage() {
           .then(() => formData);
       })
       .then((formData) => {
-        sendEmail(formData); // Trimitem datele corecte la emailjs
+        sendEmail(formData); // Send the data to EmailJS
 
-        // Resetează câmpurile formularului
+        // Reset the form fields
         setNume("");
         setEmail("");
         setTipDeseu([]);

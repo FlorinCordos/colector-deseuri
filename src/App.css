@@ -1,7 +1,6 @@
 /* General styles */
 body {
   font-family: Arial, sans-serif;
-  background-color: #1f4529;
   margin: 0;
   height: 100vh;
   display: flex;
@@ -72,25 +71,6 @@ button.ui.button {
 
 button.ui.button:hover {
   background-color: #45a049;
-}
-
-/* Feedback styles */
-.feedback-rating {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.feedback-star {
-  font-size: 30px;
-  cursor: pointer;
-  color: #ccc;
-  margin: 0 5px;
-}
-
-.feedback-star.active {
-  color: #fbc02d;
 }
 
 label {
