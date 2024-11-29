@@ -23,57 +23,57 @@ function HomePage() {
 
   const tipDeseuOptions = [
     {
-      key: "laptop",
+      key: "Laptop",
       text: "Laptop",
       value: "Laptop",
     },
     {
-      key: "monitor",
+      key: "Monitor",
       text: "Monitor",
       value: "Monitor",
     },
     {
-      key: "unitate_centrala",
+      key: "Unitate Centrală",
       text: "Unitate centrală",
       value: "Unitate Centrală",
     },
     {
-      key: "tastatura",
+      key: "Tastatură",
       text: "Tastatură",
       value: "Tastatură",
     },
     {
-      key: "mouse",
+      key: "Mouse",
       text: "Mouse",
       value: "Mouse",
     },
     {
-      key: "casti",
+      key: "Căști",
       text: "Căști",
       value: "Căști",
     },
     {
-      key: "camera_video",
+      key: "Cameră video / Microfon",
       text: "Cameră video / Microfon",
-      value: "Cameră video",
+      value: "Cameră video / Microfon",
     },
     {
-      key: "cabluri",
+      key: "Cabluri diverse",
       text: "Cabluri diverse",
       value: "Cabluri diverse",
     },
     {
-      key: "imprimanta",
+      key: "Imprimantă",
       text: "Imprimantă",
       value: "Imprimantă",
     },
     {
-      key: "fax",
-      text: "FAX",
+      key: "Fax",
+      text: "Fax",
       value: "Fax",
     },
     {
-      key: "telefon",
+      key: "Telefon",
       text: "Telefon",
       value: "Telefon",
     },
