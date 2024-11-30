@@ -18,7 +18,7 @@ function HomePage() {
   const [currentDeseu, setCurrentDeseu] = useState(null);
   const [currentCantitate, setCurrentCantitate] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
-  const [feedbackRating, setFeedbackRating] = useState(0);
+  const [deseuColectat, setDeseuColectat] = useState("");
   const navigate = useNavigate();
 
   const tipDeseuOptions = [
@@ -146,6 +146,7 @@ function HomePage() {
             data: currentDateTime,
             deseuLivrat: "FALSE",
             ID: newID,
+            deseuColectat: "FALSE",
           })
         );
 
@@ -176,8 +177,6 @@ function HomePage() {
         setEmail("");
         setTipDeseu([]);
         setDeseuriCantitati({});
-        setFeedbackRating(0);
-
         // Navighează către pagina de confirmare
         navigate("/confirm");
       })
