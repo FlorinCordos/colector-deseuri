@@ -85,9 +85,12 @@ function HomePage() {
     nume && isEmailValid(email) && Object.keys(deseuriCantitati).length > 0;
 
   const sendEmail = (formData) => {
-    const serviceID = "service_gnnfc55";
-    const templateID = "template_jf7qc27";
-    const userID = "f2gM5zwlSw0rLvLlD";
+    //const serviceID = "service_gnnfc55";
+    const serviceID = "service_63pevco";
+    //const templateID = "template_jf7qc27";
+    const templateID = "template_8cxkr2q";
+    //const userID = "f2gM5zwlSw0rLvLlD";
+    const userID = "VjH0XbNX--vjFPpE_";
 
     emailjs
       .send(serviceID, templateID, formData, userID)
