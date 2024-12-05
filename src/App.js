@@ -126,7 +126,9 @@ function HomePage() {
         `https://api.sheetbest.com/sheets/75d91a11-2dc6-481b-a5be-6786d94932e2`
       )
       .then((response) => {
-        const newID = `CMD${String(response.data.length + 1).padStart(5, "0")}`;
+        //const newID = `CMD${String(response.data.length + 1).padStart(5, "0")}`;
+        const newID = `CMD${Date.now()}${Math.floor(Math.random() * 1000)}`;
+
         const currentDateTime = new Date().toLocaleString("ro-RO", {
           year: "numeric",
           month: "2-digit",
