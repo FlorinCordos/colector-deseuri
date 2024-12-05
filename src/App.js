@@ -271,6 +271,24 @@ function ConfirmPage() {
 
 // Aplicația principală
 export default function App() {
+  const isMaintenance = true;
+  if (isMaintenance) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          fontFamily: "Arial, sans-serif",
+          width: "100%",
+          color: "white",
+        }}
+      >
+        <h1>Site-ul este în mentenanță. Revenim în curând!</h1>
+      </div>
+    );
+  }
   return (
     <Router>
       <Routes>
