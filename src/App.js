@@ -238,8 +238,8 @@ function HomePage() {
             value={currentCantitate}
             onChange={(e) => {
               const value = e.target.value;
-              if (/^\d*$/.test(value)) {
-                // Permite doar numere pozitive
+              if (/^\d*$/.test(value) && Number(value) <= 10) {
+                // Permite doar numere între 0 și 10
                 setCurrentCantitate(value);
               }
             }}
