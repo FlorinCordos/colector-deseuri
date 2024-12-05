@@ -5,6 +5,7 @@ import {
   Route,
   useNavigate,
 } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import { Form, Button, Dropdown, Modal, Input } from "semantic-ui-react";
 import "./App.css";
 import axios from "axios";
@@ -127,7 +128,9 @@ function HomePage() {
       )
       .then((response) => {
         //const newID = `CMD${String(response.data.length + 1).padStart(5, "0")}`;
-        const newID = `CMD${Date.now()}${Math.floor(Math.random() * 1000)}`;
+        const ID_AUX = `${Date.now()}${Math.floor(Math.random() * 1000)}`;
+        const newID = `CMD${ID_AUX.slice(0, 3)}${ID_AUX.slice(-4)}`;
+        //const newID = `CMD${uuidv4()}`;
 
         const currentDateTime = new Date().toLocaleString("ro-RO", {
           year: "numeric",
