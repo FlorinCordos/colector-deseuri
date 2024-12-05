@@ -69,9 +69,9 @@ function HomePage() {
       value: "Imprimantă",
     },
     {
-      key: "Fax",
-      text: "Fax",
-      value: "Fax",
+      key: "Bec",
+      text: "Bec",
+      value: "Bec",
     },
     {
       key: "Telefon",
