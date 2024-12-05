@@ -271,7 +271,7 @@ function ConfirmPage() {
 
 // Aplicația principală
 export default function App() {
-  const isMaintenance = true;
+  const isMaintenance = false;
   if (isMaintenance) {
     return (
       <div
