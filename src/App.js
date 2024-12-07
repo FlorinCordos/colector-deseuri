@@ -127,7 +127,7 @@ function HomePage() {
 
     axios
       .get(
-        `https://api.sheetbest.com/sheets/75d91a11-2dc6-481b-a5be-6786d94932e2`
+        `https://api.sheetbest.com/sheets/a3142fdf-00f1-4cb1-b97f-9eadea215d55`
       )
       .then((response) => {
         //const newID = `CMD${String(response.data.length + 1).padStart(5, "0")}`;
@@ -172,7 +172,7 @@ function HomePage() {
 
         return axios
           .post(
-            `https://api.sheetbest.com/sheets/75d91a11-2dc6-481b-a5be-6786d94932e2`,
+            `https://api.sheetbest.com/sheets/a3142fdf-00f1-4cb1-b97f-9eadea215d55`,
             rows
           )
           .then(() => formData);
@@ -225,7 +225,7 @@ function HomePage() {
           />
         </Form.Field>
         <Button type="submit" onClick={onSubmit} disabled={!isFormValid()}>
-          Submit
+          Adaugă deșeu
         </Button>
       </Form>
 
